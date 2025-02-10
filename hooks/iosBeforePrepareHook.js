@@ -21,7 +21,7 @@ function printAllFilePaths(dir) {
 
       if (stats.isDirectory()) {
         printAllFilePaths(filePath);
-      } else {
+      } else if (path.extname(filePath) === '.entitlements') {
           console.log(`${filePath} - ${stats.size} bytes`); // ファイルパス + サイズを出力
       }
   });
