@@ -17,10 +17,12 @@ function printAllFilePaths(dir) {
 
   files.forEach(file => {
       const filePath = path.join(dir, file);
-      if (fs.statSync(filePath).isDirectory()) {
-          printAllFilePaths(filePath);
+      const stats = fs.statSync(filePath);
+
+      if (stats.isDirectory()) {
+          getAllFilePaths(filePath);
       } else {
-          console.log(filePath); // 1行ずつ出力
+          console.log(`${filePath} - ${stats.size} bytes`); // ファイルパス + サイズを出力
       }
   });
 }
