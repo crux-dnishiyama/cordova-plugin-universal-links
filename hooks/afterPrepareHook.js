@@ -47,7 +47,7 @@ function run(cordovaContext) {
         }
       case IOS:
         {
-          activateUniversalLinksInIos(cordovaContext, pluginPreferences);
+          // activateUniversalLinksInIos(cordovaContext, pluginPreferences);
           break;
         }
     }
