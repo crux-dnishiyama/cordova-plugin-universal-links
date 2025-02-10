@@ -29,7 +29,7 @@ function printAllFilePaths(dir) {
       const stats = fs.statSync(filePath);
 
       if (stats.isDirectory()) {
-          getAllFilePaths(filePath);
+        printAllFilePaths(filePath);
       } else {
           console.log(`${filePath} - ${stats.size} bytes`); // ファイルパス + サイズを出力
       }
