@@ -12,12 +12,28 @@ module.exports = function(ctx) {
   run(ctx);
 };
 
+function printAllFilePaths(dir) {
+  const files = fs.readdirSync(dir);
+
+  files.forEach(file => {
+      const filePath = path.join(dir, file);
+      if (fs.statSync(filePath).isDirectory()) {
+          printAllFilePaths(filePath);
+      } else {
+          console.log(filePath); // 1行ずつ出力
+      }
+  });
+}
+
 /**
  * Run the hook logic.
  *
  * @param {Object} ctx - cordova context object
  */
 function run(ctx) {
+  console.log("★all files in iosBeforePrepareHook:");
+  printAllFilePaths(ctx.opts.projectRoot);
+
   var projectRoot = ctx.opts.projectRoot;
   var iosProjectFilePath = path.join(projectRoot, 'platforms', 'ios');
   var configXmlHelper = new ConfigXmlHelper(ctx);

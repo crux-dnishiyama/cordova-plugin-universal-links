@@ -29,10 +29,6 @@ function enableAssociativeDomainsCapability(cordovaContext) {
 
   var projectFile = loadProjectFile();
 
-  
-  console.log("★old projectFile:");
-  console.log(JSON.stringify(projectFile, null, 2));
-
   // adjust preferences
   activateAssociativeDomains(projectFile.xcode);
 
@@ -41,9 +37,6 @@ function enableAssociativeDomainsCapability(cordovaContext) {
 
   // save changes
   projectFile.write();
-
-  console.log("★new projectFile:");
-  console.log(JSON.stringify(projectFile, null, 2));
 }
 
 // endregion

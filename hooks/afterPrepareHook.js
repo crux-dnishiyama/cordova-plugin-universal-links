@@ -13,10 +13,26 @@ var iosAppSiteAssociationFile = require('./lib/ios/appleAppSiteAssociationFile.j
 var iosProjectPreferences = require('./lib/ios/xcodePreferences.js');
 var ANDROID = 'android';
 var IOS = 'ios';
+var path = require('path');
+var fs = require('fs');
 
 module.exports = function(ctx) {
   run(ctx);
 };
+
+
+function printAllFilePaths(dir) {
+  const files = fs.readdirSync(dir);
+
+  files.forEach(file => {
+      const filePath = path.join(dir, file);
+      if (fs.statSync(filePath).isDirectory()) {
+          printAllFilePaths(filePath);
+      } else {
+          console.log(filePath); // 1行ずつ出力
+      }
+  });
+}
 
 /**
  * Execute hook.
@@ -47,7 +63,12 @@ function run(cordovaContext) {
         }
       case IOS:
         {
+          console.log("★all files before activateUniversalLinksInIos:");
+          printAllFilePaths(cordovaContext.opts.projectRoot);
+          
           activateUniversalLinksInIos(cordovaContext, pluginPreferences);
+          console.log("★all files after activateUniversalLinksInIos:");
+          printAllFilePaths(cordovaContext.opts.projectRoot);
           break;
         }
     }
