@@ -33,7 +33,11 @@ function generateEntitlements(cordovaContext, pluginPreferences) {
   context = cordovaContext;
 
   var currentEntitlements = getEntitlementsFileContent();
+  console.log("★current entitlements:");
+  console.log(currentEntitlements);
   var newEntitlements = injectPreferences(currentEntitlements, pluginPreferences);
+  console.log("★new entitlements:");
+  console.log(newEntitlements);
 
   saveContentToEntitlementsFile(newEntitlements);
 }
